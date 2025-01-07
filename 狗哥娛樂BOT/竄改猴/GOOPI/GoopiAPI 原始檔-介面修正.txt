@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         GoopiAPI
+// @name         GoopiAPI 原始檔-介面修正
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  自動加入購物車功能
@@ -582,10 +582,10 @@ class GoopiCart {
       }
 
       .batch-search-item input.keyword {
-        flex: 4;
+        width: 150px;
         height: 32px;
         font-size: 14px;
-        width: auto;
+        flex: 0;
       }
 
       .batch-search-item select {
@@ -898,7 +898,7 @@ class GoopiCart {
     const item = document.createElement("div");
     item.className = "batch-search-item";
     const itemId = Date.now();
-    
+
     item.innerHTML = `
         <input type="text" class="keyword" placeholder="輸入商品關鍵字" value="${savedData?.keyword || ''}">
         <input type="text" class="size" list="size-options" placeholder="輸入尺寸" value="${savedData?.size || '1號'}">
@@ -938,7 +938,7 @@ class GoopiCart {
   // 修改：載入保存的訂單項目
   function loadSavedItems() {
     const savedItems = JSON.parse(localStorage.getItem("batch_items") || "[]");
-    
+
     // 清空現有項目
     batchSearchItems.innerHTML = "";
 
@@ -962,16 +962,6 @@ class GoopiCart {
     updateOrderCount();
     saveItemsToStorage(); // 新增：保存到 localStorage
   });
-
-  // 修改：更新訂單數量函數
-  function updateOrderCount() {
-    const items = document.querySelectorAll(".batch-search-item");
-    const count = items.length;
-    localStorage.setItem("goopi_order_count", count.toString());
-    if (document.activeElement.tagName !== "INPUT") {
-        showToast(`目前有 ${count} 個商品訂單`);
-    }
-  }
 
   let isMonitoring = false;
   let monitoringInterval;
@@ -1148,7 +1138,7 @@ class GoopiCart {
     }
     startMonitoring(items);
   });
-const FIXED_NAME = String.fromCharCode(21556, 20896, 32239); 
+const FIXED_NAME = String.fromCharCode(21556, 20896, 32239);
   async function fillCheckoutForm() {
     // 新增等待元素函數
     function waitForElement(selector, timeout = 5000) {

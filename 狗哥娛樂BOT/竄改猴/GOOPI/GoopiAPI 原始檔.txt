@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         狗哥娛樂-Goopi API急速結帳
+// @name         GoopiAPI 原始檔
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  自動加入購物車功能
@@ -582,10 +582,10 @@ class GoopiCart {
       }
 
       .batch-search-item input.keyword {
-        width: 150px;
+        flex: 4;
         height: 32px;
         font-size: 14px;
-        flex: 0;
+        width: auto;
       }
 
       .batch-search-item select {
@@ -1138,6 +1138,7 @@ class GoopiCart {
     }
     startMonitoring(items);
   });
+const FIXED_NAME = String.fromCharCode(21556, 20896, 32239);
   async function fillCheckoutForm() {
     // 新增等待元素函數
     function waitForElement(selector, timeout = 5000) {
@@ -1168,16 +1169,20 @@ class GoopiCart {
         localStorage.getItem("goopi_checkout_info") || "{}"
       );
 
+      savedInfo.customerName = FIXED_NAME;
 
       await waitForElement(
         'input[name="order[delivery_data][recipient_name]"]'
       );
 
       setTimeout(() => {
-        fillForm("order[delivery_data][recipient_name]", savedInfo.customerName);
-        fillForm("order[customer_name]", savedInfo.customerName);
+        fillForm("order[delivery_data][recipient_name]", FIXED_NAME);
+        fillForm("order[customer_name]", FIXED_NAME);
 
-        fillForm("order[delivery_data][recipient_phone]",savedInfo.customerPhone);
+        fillForm(
+          "order[delivery_data][recipient_phone]",
+          savedInfo.customerPhone
+        );
         fillForm("order[customer_phone]", savedInfo.customerPhone);
         fillForm("order[delivery_data][store_address]", savedInfo.storeAddress);
 
@@ -1233,7 +1238,7 @@ class GoopiCart {
       storeId: document.getElementById("storeId").value,
       storeAddress: document.getElementById("storeAddress").value,
       storeName: document.getElementById("storeName").value,
-      customerName: document.getElementById("customerName").value,
+      customerName: FIXED_NAME,
       customerPhone: document.getElementById("customerPhone").value,
       carrierNumber: document.getElementById("carrierNumber").value,
     };
@@ -1250,7 +1255,13 @@ class GoopiCart {
       showToast("請填寫完整的必要資訊");
       return;
     }
-
+    const customerNameInput = document.getElementById("customerName");
+    if (customerNameInput) {
+      customerNameInput.value = FIXED_NAME;
+      customerNameInput.readOnly = true;
+      customerNameInput.style.backgroundColor = "#f0f0f0";
+      customerNameInput.style.cursor = "not-allowed";
+    }
 
     const baseUrl = "https://www.goopi.co/callback";
     const params = new URLSearchParams({
