@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         狗哥娛樂-KKTIX急速購票
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      1.0
 // @description  KKTIX急速購票
 // @match        https://kktix.com/events/*/registrations/new
 // @match        https://kktix.com/*
