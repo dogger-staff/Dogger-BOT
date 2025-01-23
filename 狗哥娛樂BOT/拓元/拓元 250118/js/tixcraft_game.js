@@ -74,7 +74,7 @@ function date_main(settings)  ///////////////控制刷新時間
 {
     myInterval = setInterval(() => {
         date_keyword(settings);
-    }, 200);
+    }, 300);
 }
 
 async function do_reload_if_not_overheat(settings) {
