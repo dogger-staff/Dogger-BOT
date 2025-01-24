@@ -65,7 +65,7 @@ function date_keyword(settings) ////////////////控制關鍵字選區域
             clearInterval(myInterval);
             setTimeout(() => {
                 window.location.href = link;
-            }, 100);  ////////////////////////////日期延遲
+            }, 0);  ////////////////////////////日期延遲
         }
     } 
 }

@@ -153,7 +153,7 @@ function tixcraft_set_ocr_answer(answer)
         $('#TicketForm_verifyCode').val(answer);
         setTimeout(function() {
             $("button[type='submit']").click();  /////送出訂單延遲
-        }, 100); 
+        }, 300); 
     }
 }
 

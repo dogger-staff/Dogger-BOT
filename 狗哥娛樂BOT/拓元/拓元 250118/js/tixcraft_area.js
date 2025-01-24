@@ -74,7 +74,7 @@ function tixcraft_area_keyword(settings) {
                 if (areaUrlList && areaUrlList[link_id]) {
                     setTimeout(() => {
                         window.location.href = areaUrlList[link_id];
-                    }, 300); // 區域延遲
+                    }, 0); // 區域延遲
                 }
             }
         }
