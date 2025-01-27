@@ -1,6 +1,5 @@
 function get_target_area_with_order(settings, matched_block)
 {
-    //console.log(settings);
     let target_area = null;
 
     if(matched_block.length) {
@@ -25,7 +24,6 @@ function get_target_area_with_order(settings, matched_block)
 
 function get_target_date_with_order(settings, matched_block)
 {
-    //console.log(settings);
     let target_area = null;
 
     if(matched_block.length) {

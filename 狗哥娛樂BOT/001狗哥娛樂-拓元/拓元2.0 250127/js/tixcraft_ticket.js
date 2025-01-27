@@ -113,7 +113,7 @@ function tixcraft_assign_ticket_number(settings)//控制票種張數
 
 var myInterval = null;
 
-function get_ocr_image()//儲存驗證碼圖片
+function get_ocr_image()
 {
     //console.log("get_ocr_image");
     let image_data = "";
@@ -159,12 +159,12 @@ chrome.runtime.onMessage.addListener((message) => {
         // 刷新頁面
         setTimeout(() => {
             window.location.reload();
-        }, 500); // 設定500毫秒延遲避免過於頻繁
+        }, 0); // 設定500毫秒延遲避免過於頻繁
     }
 });
 
 
-function tixcraft_set_ocr_answer(answer)//填入驗證碼並提交
+function tixcraft_set_ocr_answer(answer)
 {
     //console.log("answer:"+answer);
     if(answer.length > 0) {
@@ -175,7 +175,7 @@ function tixcraft_set_ocr_answer(answer)//填入驗證碼並提交
     }
 }
 
-async function tixcraft_get_ocr_answer(api_url, image_data)//發送圖片資料至 OCR API
+async function tixcraft_get_ocr_answer(api_url, image_data)
 {
     let bundle = {
       action: 'ocr',
@@ -192,7 +192,7 @@ async function tixcraft_get_ocr_answer(api_url, image_data)//發送圖片資料�
     //ocr(bundle.data.url, bundle.data.image_data, bundle.data.callback);
 }
 
-function tixcraft_orc_image_ready(api_url)//
+function tixcraft_orc_image_ready(api_url)
 {
     let ret=false;
     let image_data = get_ocr_image();

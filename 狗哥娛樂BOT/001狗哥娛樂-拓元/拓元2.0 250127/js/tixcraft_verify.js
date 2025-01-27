@@ -1,6 +1,6 @@
 const storage = chrome.storage.local;
 
-function setUserGuessStringAndSubmit() {
+function setUserGuessStringAndSubmit() {//輸入驗證問題
     storage.get('settings', function (result) {
         const userGuessString = result.settings?.advanced?.user_guess_string?.replace(/"/g, "");
         const inputElement = document.querySelector('input[name="checkCode"]');

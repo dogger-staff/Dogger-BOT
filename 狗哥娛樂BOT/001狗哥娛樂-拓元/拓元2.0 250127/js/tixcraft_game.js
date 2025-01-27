@@ -142,14 +142,13 @@ function date_auto_reload() //控制網頁刷新
     }
 }
 
-// Ensure date_clean always runs
 storage.get('settings', function (items)
 {
     if (items.settings)
     {
         settings = items.settings;
     }
-    date_clean(); // Run date_clean regardless of settings
+    date_clean();
 });
 
 storage.get('status', function (items)

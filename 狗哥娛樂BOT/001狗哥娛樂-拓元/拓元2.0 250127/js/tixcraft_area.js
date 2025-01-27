@@ -49,13 +49,12 @@ function tixcraft_area_keyword(settings) // 控制關鍵字選區域
             target_area = get_target_area_with_order(settings, matched_block);
             if (target_area && target_area.length) {
                 console.log("match keyword: " + area_keyword_array[i]);
-                break; // 找到匹配區域後跳出迴圈
+                break;
             }
         }
     }
 
     if (!target_area || !target_area.length) {
-        // 如果所有關鍵字都無法匹配，則嘗試匹配所有區域
         let query_string = "ul.area-list > li > a";
         let matched_block = [];
         $(query_string).each(function () {
@@ -87,7 +86,7 @@ function tixcraft_area_keyword(settings) // 控制關鍵字選區域
                 if (new_url) {
                     setTimeout(() => {
                         window.location.href = new_url;
-                    }, 0); // 區域延遲
+                    }, 0); //////////////////////////////////// 區域延遲
                 }
             }
         }
@@ -160,7 +159,7 @@ function area_auto_reload() //控制網頁刷新
 storage.get('settings', function (items) {
     if (items.settings) {
         settings = items.settings;
-        tixcraft_clean_exclude(settings); // 確保無論 ON/OFF 都執行
+        tixcraft_clean_exclude(settings);
     }
 });
 
