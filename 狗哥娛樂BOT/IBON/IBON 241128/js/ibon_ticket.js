@@ -38,6 +38,7 @@ function ibon_assign_adjacent_seat(flag) {
 }
 
 function ibon_focus_on_captcha() {
+    console.log("Focusing on captcha input...");
     $("#ctl00_ContentPlaceHolder1_CHK").focus();
 }
 
@@ -46,8 +47,10 @@ var myInterval = null;
 function ibon_get_ocr_image() {
     let image_data = "";
 
-    let img = document.querySelector(".chk_pic");
+    // 更新验证码图片的选择器
+    let img = document.querySelector("img[src*='pic.aspx?TYPE=UTK0201_001']");
     if (img) {
+        console.log("Captcha image found, extracting image data...");
         let canvas = document.createElement('canvas');
         let context = canvas.getContext('2d');
         canvas.height = img.naturalHeight;
@@ -56,23 +59,37 @@ function ibon_get_ocr_image() {
         let img_data = canvas.toDataURL();
         if (img_data) {
             image_data = img_data.split(",")[1];
+            console.log("Image data extracted successfully.");
+        } else {
+            console.log("Failed to extract image data.");
         }
+    } else {
+        console.log("Captcha image not found.");
     }
     return image_data;
 }
 
 chrome.runtime.onMessage.addListener((message) => {
+    console.log("Received OCR answer from runtime: " + message.answer);
     ibon_set_ocr_answer(message.answer);
 });
 
 function ibon_set_ocr_answer(answer) {
-    console.log("answer:" + answer);
+    console.log("Setting OCR answer: " + answer);
     if (answer.length > 0) {
         $("#ctl00_ContentPlaceHolder1_CHK").val(answer);
         setTimeout(() => {
-            const nextStepButton = $("a.btn.btn-primary.btn-block[onclick*='letMeGo']"); 
-            nextStepButton.click(); // 提交表单
+            // 更新“下一步”按钮的选择器
+            const nextStepButton = $("a.btn.btn-primary.btn-block");
+            if (nextStepButton.length > 0) {
+                console.log("Clicking next step button...");
+                nextStepButton.click(); // 提交表单
+            } else {
+                console.log("Next step button not found.");
+            }
         }, 600);
+    } else {
+        console.log("No answer received from OCR.");
     }
 }
 
@@ -85,16 +102,21 @@ async function ibon_get_ocr_answer(api_url, image_data) {
         }
     };
 
+    console.log("Sending OCR request to API...");
     const return_answer = await chrome.runtime.sendMessage(bundle);
+    console.log("OCR response received.");
 }
 
 function ibon_orc_image_ready(api_url) {
     let ret = false;
     let image_data = ibon_get_ocr_image();
     if (image_data.length > 0) {
+        console.log("Image is ready for OCR processing.");
         ret = true;
         if (myInterval) clearInterval(myInterval);
         ibon_get_ocr_answer(api_url, image_data);
+    } else {
+        console.log("Image data not ready.");
     }
     return ret;
 }
@@ -123,13 +145,16 @@ function get_remote_url(settings) {
 
 storage.get('status', function (items) {
     if (items.status && items.status == 'ON') {
+        console.log("Status ON, starting ticket assignment...");
         ibon_assign_ticket_number(settings.ticket_number);
         ibon_assign_adjacent_seat(settings.advanced.disable_adjacent_seat);
 
         if (settings.ocr_captcha.enable) {
+            console.log("OCR captcha enabled, waiting for image...");
             let remote_url_string = get_remote_url(settings);
             if (!ibon_orc_image_ready(remote_url_string)) {
                 myInterval = setInterval(() => {
+                    console.log("Checking if OCR image is ready...");
                     ibon_orc_image_ready(remote_url_string);
                 }, 100);
             }
