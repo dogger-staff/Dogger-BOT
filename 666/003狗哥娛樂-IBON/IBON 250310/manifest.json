@@ -53,24 +53,10 @@
         "js/common.js"
       ]
     },
-
-    {
-      "matches": [
-        "https://orders.ibon.com.tw/application/*"
-      ],
-      "run_at": "document_end",
-      "js": [
-        "jquery.min.js",
-        "js/ibon_verification.js",
-        "js/ibon_verification_next.js"
-      ]
-    },
     {
       "matches": [
         "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*",
-        "https://orders.ibon.com.tw/application/UTK02/UTK0202_.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*",
-        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*",
-        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*"
+        "https://orders.ibon.com.tw/application/UTK02/UTK0202_.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*"
       ],
       "run_at": "document_end",
       "js": [
@@ -78,7 +64,17 @@
         "js/ibon_ticket.js"
 
        ]
-    }
+    },
+    {
+      "matches": [
+          "https://orders.ibon.com.tw/application/UTK02/UTK0201_0.aspx?rn=*&PERFORMANCE_ID=*&PRODUCT_ID=*&SHOW_PLACE_MAP=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+          "jquery.min.js",
+          "js/ibon_verification.js"
+      ]
+  }
 
   ],
     "version": "1.0"

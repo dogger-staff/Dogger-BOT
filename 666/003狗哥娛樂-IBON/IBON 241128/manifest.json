@@ -101,7 +101,8 @@
             "run_at": "document_end",
             "js": [
                 "jquery.min.js",
-                "js/ibon_verification.js"
+                "js/ibon_verification.js",
+                "js/ibon_verification_next.js"
             ]
         }
     ],
