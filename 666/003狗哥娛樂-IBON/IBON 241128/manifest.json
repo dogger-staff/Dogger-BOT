@@ -1,0 +1,109 @@
+{
+    "author": "狗哥娛樂",
+    "name": "IBON急速購票",
+    "description": "IBON急速購票擴充程式",
+    "icons": {
+        "16": "icons/ibon.png",
+        "32": "icons/ibon.png",
+        "48": "icons/ibon.png",
+        "64": "icons/ibon.png",
+        "128": "icons/ibon.png"
+    },
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "permissions": [
+        "storage",
+        "declarativeNetRequest",
+        "declarativeNetRequestFeedback"
+    ],
+    "host_permissions": [
+        "http://maxbot.dropboxlike.com:16888/*",
+        "http://127.0.0.1:16888/*"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "data/*.json"
+            ],
+            "extension_ids": [
+                "*"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "options_page": "options.html",
+    "action": {
+        "default_icon": "icons/ibon.png",
+        "default_title": "ibon BOT"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://ticket.ibon.com.tw/ActivityInfo/Details/*" 
+            ],
+            "run_at": "document_start",
+            "js": [
+                "jquery.min.js",
+                "js/ibon_detail.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://orders.ibon.com.tw/application/UTK02/UTK0201_000.aspx?*",
+                "https://orders.ibon.com.tw/application/UTK02/utk0201_000.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "jquery.min.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://orders.ibon.com.tw/application/UTK02/UTK0201_000.aspx?*",
+                "https://orders.ibon.com.tw/application/UTK02/utk0201_000.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*"
+            ],
+            "run_at": "document_end",
+            "world": "MAIN",
+            "js": [
+                "jquery.min.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "jquery.min.js",
+                "js/ibon_ticket.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*"
+            ],
+            "run_at": "document_end",
+            "world": "MAIN",
+            "js": [
+                "jquery.min.js",
+                "js/ibon_ticket_next.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://orders.ibon.com.tw/application/UTK02/UTK0201_0.aspx?rn=*&PERFORMANCE_ID=*&PRODUCT_ID=*&SHOW_PLACE_MAP=*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "jquery.min.js",
+                "js/ibon_verification.js"
+            ]
+        }
+    ],
+    "version": "1.0"
+}

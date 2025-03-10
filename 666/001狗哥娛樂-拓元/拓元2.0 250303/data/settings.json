@@ -1,0 +1,14 @@
+{
+    "ticket_number": 2, 
+    "date_auto_select": {"enable": true, "date_keyword": "", "mode": "from top to bottom"}, 
+    "area_auto_select": {"enable": true, "area_keyword": "", "mode": "from top to bottom"}, 
+    "keyword_exclude": "\"\u8f2a\u6905\",\"\u8eab\u969c\",\"\u8eab\u5fc3\u969c\u7919\",\"\u906e\u853d\",\"\u8996\u7dda\u4e0d\u5b8c\u6574\"", 
+    "ocr_captcha": {"enable": true}, 
+    "advanced": {
+    "user_guess_string": "", 
+    "remote_url": "\"http://127.0.0.1:16888/\"", 
+    "auto_reload_page_interval": 0.1, 
+    "auto_reload_overheat_count": 4, 
+    "auto_reload_overheat_cd": 1 ,
+    "submit_order_delay": 1
+    }}
