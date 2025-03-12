@@ -9,7 +9,7 @@ const keyword_exclude = document.querySelector('#keyword_exclude');
 const auto_reload_page_interval = document.querySelector('#auto_reload_page_interval');
 const auto_reload_overheat_count = document.querySelector('#auto_reload_overheat_count');
 const auto_reload_overheat_cd = document.querySelector('#auto_reload_overheat_cd');
-const submit_order_min_seconds = document.querySelector('#submit_order_min_seconds'); // 新名稱
+const submit_order_min_seconds = document.querySelector('#submit_order_min_seconds');
 const ocr_captcha_enable = document.querySelector('#ocr_captcha_enable');
 const remote_url = document.querySelector('#remote_url');
 const user_guess_string = document.querySelector('#user_guess_string');
@@ -111,7 +111,6 @@ function loadChanges() {
             }
             remote_url.value = remote_url_string;
 
-            //message('Loaded saved settings.');
         } else {
             console.log('no settings found');
         }
