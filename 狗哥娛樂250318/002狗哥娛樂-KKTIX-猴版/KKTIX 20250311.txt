@@ -1,0 +1,186 @@
+// ==UserScript==
+// @name         狗哥娛樂-KKTIX急速購票 3.0
+// @namespace    http://tampermonkey.net/
+// @version      3.0
+// @description  狗哥娛樂-KKTIX急速購票
+// @match        https://*.kktix.cc/events/*
+// @match        https://kktix.com/events/*/registrations/*
+// @match        https://tix-get-go.kktix.cc/events/*
+// @match        https://kklivetw.kktix.cc/events/*
+// @grant        GM_setValue
+// @grant        GM_getValue
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const loadSettings = () => {
+        return {
+            quality: GM_getValue('quality', 2),
+            a: GM_getValue('a', 1),
+            b: GM_getValue('b', ""),
+            autoRefresh: GM_getValue('autoRefresh', false)
+        };
+    };
+
+    const saveSettings = (settings) => {
+        GM_setValue('quality', settings.quality);
+        GM_setValue('a', settings.a);
+        GM_setValue('b', settings.b);
+        GM_setValue('autoRefresh', settings.autoRefresh);
+    };
+
+    let { quality, a, b, autoRefresh } = loadSettings();
+
+    const controlPanel = document.createElement('div');
+    controlPanel.style.position = 'fixed';
+    controlPanel.style.top = '10px';
+    controlPanel.style.right = '10px';
+    controlPanel.style.backgroundColor = 'white';
+    controlPanel.style.border = '1px solid black';
+    controlPanel.style.padding = '10px';
+    controlPanel.style.zIndex = '10000';
+
+    controlPanel.innerHTML = `
+        <div>
+            <label>張數: </label>
+            <input id="qualityInput" type="number" value="${quality}" min="1" max="4" style="width: 50px;">
+        </div>
+        <div>
+            <label>區域: </label>
+            <input id="areaInput" type="number" value="${a}" min="1" style="width: 50px;">
+        </div>
+        <div>
+            <label>驗證問題: </label>
+            <input id="captchaInput" type="text" value="${b}" style="width: 100px;">
+        </div>
+        <button id="updateSettings">更新設定</button>
+        <button id="toggleAutoRefresh">${autoRefresh ? '關閉自動刷新' : '開啟自動刷新'}</button>
+        <div id="updateMessage" style="color: green; display: none; margin-top: 10px;">更新成功！</div>
+    `;
+
+    document.body.appendChild(controlPanel);
+
+    const initializeInterface = () => {
+        const { quality, a, b, autoRefresh } = loadSettings();
+        document.getElementById('qualityInput').value = quality;
+        document.getElementById('areaInput').value = a;
+        document.getElementById('captchaInput').value = b;
+        document.getElementById('toggleAutoRefresh').textContent = autoRefresh ? '關閉自動刷新' : '開啟自動刷新';
+    };
+
+    initializeInterface();
+
+    document.getElementById('updateSettings').addEventListener('click', () => {
+        let newQuality = parseInt(document.getElementById('qualityInput').value, 10);
+        let newArea = parseInt(document.getElementById('areaInput').value, 10);
+        const newCaptcha = document.getElementById('captchaInput').value || "";
+
+        if (isNaN(newQuality) || newQuality < 1) {
+            newQuality = 1;
+        } else if (newQuality > 4) {
+            newQuality = 4;
+        }
+
+        if (isNaN(newArea) || newArea < 1) {
+            newArea = 1;
+        }
+
+        quality = newQuality;
+        a = newArea;
+        b = newCaptcha;
+
+        const newSettings = { quality, a, b, autoRefresh };
+        saveSettings(newSettings);
+
+        const updateMessage = document.getElementById('updateMessage');
+        updateMessage.style.display = 'block';
+        setTimeout(() => {
+            updateMessage.style.display = 'none';
+        }, 500);
+    });
+
+    document.getElementById('toggleAutoRefresh').addEventListener('click', () => {
+        autoRefresh = !autoRefresh;
+        const newSettings = { quality, a, b, autoRefresh };
+        saveSettings(newSettings);
+
+        document.getElementById('toggleAutoRefresh').textContent = autoRefresh ? '關閉自動刷新' : '開啟自動刷新';
+
+        if (!autoRefresh && refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+        }
+    });
+
+    let refreshInterval = null;
+
+    const interval = setInterval(() => {
+        const ticketUnits = document.querySelectorAll('.ticket-unit');
+        if (ticketUnits.length === 0) return;
+
+        let found = false;
+        let allSoldOut = true;
+
+        const checkUnit = (unit) => {
+            const quantityInput = unit.querySelector('input[ng-model="ticketModel.quantity"]');
+            const soldOutMessage = unit.querySelector('.sold-out-message');
+            const remainingTickets = unit.querySelector('.ticket-quantity .help-inline.danger');
+
+            if (remainingTickets) {
+                const remainingCount = parseInt(remainingTickets.textContent.match(/\d+/)?.[0] || '0', 10);
+                if (remainingCount < quality) {
+                    quality = remainingCount;
+                }
+            }
+
+            if (quantityInput && !soldOutMessage) {
+                quantityInput.value = String(quality);
+                quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
+                found = true;
+                allSoldOut = false;
+            }
+        };
+
+        if (ticketUnits.length >= a) {
+            checkUnit(ticketUnits[a - 1]);
+        }
+
+        if (!found && ticketUnits.length > 0) {
+            checkUnit(ticketUnits[0]);
+            for (let i = 1; i < ticketUnits.length && !found; i++) {
+                checkUnit(ticketUnits[i]);
+            }
+        }
+
+        const agreeCheckbox = document.getElementById('person_agree_terms');
+        if (agreeCheckbox && !agreeCheckbox.checked) {
+            agreeCheckbox.click();
+        }
+
+        const captchaInput = document.querySelector('input[ng-model="conditions.custom_captcha"]');
+        if (captchaInput && captchaInput.value === '') {
+            captchaInput.value = b;
+            captchaInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        const nextButton = document.querySelector('button.btn-primary[ng-click="challenge()"]');
+        if (nextButton && !nextButton.disabled) {
+            nextButton.click();
+        }
+
+        if (allSoldOut && autoRefresh) {
+            if (!refreshInterval) {
+                if (refreshInterval) clearInterval(refreshInterval);
+                refreshInterval = setInterval(() => {
+                    location.reload();
+                }, 200);
+            }
+        } else {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+        }
+    }, 100);
+})();
