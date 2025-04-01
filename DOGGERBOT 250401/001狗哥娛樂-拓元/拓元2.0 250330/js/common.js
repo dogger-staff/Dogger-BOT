@@ -1,4 +1,4 @@
-function get_target_area_with_order(settings, matched_block)
+function get_target_area_with_order(settings, matched_block)//控制區域選擇
 {
     let target_area = null;
 
@@ -22,7 +22,7 @@ function get_target_area_with_order(settings, matched_block)
     return target_area;
 }
 
-function get_target_date_with_order(settings, matched_block)
+function get_target_date_with_order(settings, matched_block)//控制日期選擇
 {
     let target_area = null;
 
@@ -47,6 +47,6 @@ function get_target_date_with_order(settings, matched_block)
     return target_area;
 }
 
-function getRandom(min,max){
+function getRandom(min,max){//控制隨機
     return Math.floor(Math.random()*(max-min+1))+min;
 };

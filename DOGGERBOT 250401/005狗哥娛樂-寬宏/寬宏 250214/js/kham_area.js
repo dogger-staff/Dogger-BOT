@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     // 定义关键字优先级数组
-    const keywords = ["5880", "4樓"];
+    const keywords = ["3F區800", "區800"];
     let clicked = false;
 
     // 遍历表格中的行

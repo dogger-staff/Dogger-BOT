@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="message"></div>
-  <h2>狗哥娛樂-拓元搶票機器人</h2>
+  <h2>DOGGER STUDIO-拓元搶票機器人</h2>
   <div class="row g-3">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -22,7 +22,7 @@
         <button class="nav-link" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced-tab-pane" type="button" role="tab" aria-controls="advanced-tab-pane" aria-selected="false">進階設定</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="verification-tab" data-bs-toggle="tab" data-bs-target="#verification-tab-pane" type="button" role="tab" aria-controls="verification-tab-pane" aria-selected="false">驗證問題</button>
+        <button class="nav-link" id="verification-tab" data-bs-toggle="tab" data-bs-target="#verification-tab-pane" type="button" role="tab" aria-controls="verification-tab-pane" aria-selected="false">使用者自定字典</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -146,7 +146,6 @@
             <input class="form-control" id="auto_reload_page_interval" value="" />
           </div>
         </div>
-
         <div class="row mb-3">
           <label for="auto_reload_overheat_count" class="col-sm-2 col-form-label">每2.5秒最多可以刷新次數</label>
           <div class="col-sm-10">
@@ -169,6 +168,16 @@
           <div class="col-sm-10">
             <select id="submit_order_min_seconds" class="form-select" aria-label="Default select">
               <option value="0">不延遲</option> <!-- 添加不延遲選項 -->
+              <option value="4">4</option>
+              <option value="4.1">4.1</option>
+              <option value="4.2">4.2</option>
+              <option value="4.3">4.3</option>
+              <option value="4.4">4.4</option>
+              <option value="4.5">4.5</option>
+              <option value="4.6">4.6</option>
+              <option value="4.7">4.7</option>
+              <option value="4.8">4.8</option>
+              <option value="4.9">4.9</option>
               <option value="5">5</option>
               <option value="5.1">5.1</option>
               <option value="5.2">5.2</option>
@@ -180,16 +189,6 @@
               <option value="5.8">5.8</option>
               <option value="5.9">5.9</option>
               <option value="6">6</option>
-              <option value="6.1">6.1</option>
-              <option value="6.2">6.2</option>
-              <option value="6.3">6.3</option>
-              <option value="6.4">6.4</option>
-              <option value="6.5">6.5</option>
-              <option value="6.6">6.6</option>
-              <option value="6.7">6.7</option>
-              <option value="6.8">6.8</option>
-              <option value="6.9">6.9</option>
-              <option value="7">7</option>
             </select>
           </div>
         </div>
@@ -215,7 +214,7 @@
       <!-- tab 3 -->
       <div class="tab-pane fade" id="verification-tab-pane" role="tabpanel" aria-labelledby="verification-tab" tabindex="2">
         <div class="row mb-3">
-          <label for="user_guess_string" class="col-sm-2 col-form-label">使用者自定字典</label>
+          <label for="user_guess_string" class="col-sm-2 col-form-label">驗證問題</label>
           <div class="col-sm-10">
             <textarea class="form-control" id="user_guess_string" rows="3"></textarea>
           </div>
