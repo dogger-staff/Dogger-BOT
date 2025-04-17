@@ -15,9 +15,10 @@
         "type": "module"
     },
     "permissions": [
-        "storage",
         "declarativeNetRequest",
-        "declarativeNetRequestFeedback"
+        "declarativeNetRequestFeedback",
+        "storage",
+        "activeTab"
     ],
     "host_permissions": [
         "http://127.0.0.1:16888/*"

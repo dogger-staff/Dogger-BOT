@@ -46,7 +46,6 @@
                 "https://kham.com.tw/application/UTK02/UTK0201_.aspx?PRODUCT_ID=*"
             ],
             "run_at": "document_end",
-            "world": "MAIN",
             "js": [
                 "jquery.min.js",
                 "js/kham_event_home.js"

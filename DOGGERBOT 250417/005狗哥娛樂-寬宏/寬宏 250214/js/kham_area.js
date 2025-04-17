@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     // 定义关键字优先级数组
-    const keywords = ["3F區800", "區800"];
+    const keywords = ["1980"];
     let clicked = false;
 
     // 遍历表格中的行
@@ -38,7 +38,6 @@ $(document).ready(function () {
                 $(this).trigger("click");
                 console.log("Clicked row with keyword:", keyword, $(this));
                 clicked = true;
-                return false; // 结束内层循环
             }
         }
     });
