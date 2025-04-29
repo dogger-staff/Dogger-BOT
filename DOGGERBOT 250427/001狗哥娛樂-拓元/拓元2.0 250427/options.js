@@ -1,5 +1,6 @@
 const storage = chrome.storage.local;
 const submitButton = document.querySelector('#save_btn');
+const target_url = document.querySelector('#target_url');
 const ticket_number = document.querySelector('#ticket_number');
 const date_select_mode = document.querySelector('#date_select_mode');
 const date_keyword = document.querySelector('#date_keyword');
@@ -27,6 +28,7 @@ async function saveChanges() {
         message('Error: No ticket_number specified');
     } else {
         if (settings) {
+            settings.target_url = target_url.value;
             settings.ticket_number = ticket_number_value;
             settings.date_auto_select.mode = date_select_mode.value;
 
@@ -55,7 +57,7 @@ async function saveChanges() {
             settings.advanced.auto_reload_page_interval = Number(auto_reload_page_interval.value);
             settings.advanced.auto_reload_overheat_count = Number(auto_reload_overheat_count.value);
             settings.advanced.auto_reload_overheat_cd = Number(auto_reload_overheat_cd.value);
-            settings.advanced.submit_order_min_seconds = Number(submit_order_min_seconds.value); // 修改名稱
+            settings.advanced.submit_order_min_seconds = Number(submit_order_min_seconds.value);
             settings.ocr_captcha.enable = ocr_captcha_enable.checked;
             settings.next.enable = next.checked;
 
@@ -78,6 +80,7 @@ function loadChanges() {
     storage.get('settings', function (items) {
         if (items.settings) {
             settings = items.settings;
+            target_url.value = settings.target_url || '';
             ticket_number.value = settings.ticket_number;
             date_select_mode.value = settings.date_auto_select.mode;
             date_keyword.value = settings.date_auto_select.date_keyword;

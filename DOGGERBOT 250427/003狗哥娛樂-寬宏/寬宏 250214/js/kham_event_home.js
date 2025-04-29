@@ -1,9 +1,16 @@
 const storage = chrome.storage.local;
+const currentUrl = window.location.href;
 var settings = null;
 
 
 function click_button() {
-    $("body > div.buynow > a button[onclick].red").click();  
+    if (currentUrl.includes("UTK0201_.aspx")) {
+        const newUrl = currentUrl.replace("UTK0201_.aspx", "UTK0201_00.aspx");
+        location.href = newUrl;
+    }else if(currentUrl.includes("utk0201_.aspx")) {
+        const newUrl = currentUrl.replace("utk0201_.aspx", "UTK0201_00.aspx");
+        location.href = newUrl;
+    }
     setTimeout(function() {
         location.reload();
     }, 1000);

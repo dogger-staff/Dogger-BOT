@@ -149,8 +149,9 @@ storage.get('settings', function (items)
     if (items.settings)
     {
         settings = items.settings;
+        date_clean();
     }
-    date_clean();
+
 });
 
 storage.get('status', function (items)

@@ -43,9 +43,10 @@
     "content_scripts": [
         {
             "matches": [
-                "https://kham.com.tw/application/UTK02/UTK0201_.aspx?PRODUCT_ID=*"
+                "https://kham.com.tw/application/UTK02/UTK0201_.aspx?PRODUCT_ID=*",
+                "https://kham.com.tw/application/utk02/utk0201_.aspx?PRODUCT_ID=*"
             ],
-            "run_at": "document_end",
+            "run_at": "document_start",
             "js": [
                 "jquery.min.js",
                 "js/kham_event_home.js"
@@ -53,7 +54,8 @@
         },
         {
             "matches": [
-                "https://kham.com.tw/application/UTK02/UTK0201_00.aspx?PRODUCT_ID=*"
+                "https://kham.com.tw/application/UTK02/UTK0201_00.aspx?PRODUCT_ID=*",
+                "https://kham.com.tw/application/utk02/UTK0201_00.aspx?PRODUCT_ID=*"
             ],
             "run_at": "document_end",
             "world": "MAIN",
@@ -65,6 +67,7 @@
         {
             "matches": [
                 "https://kham.com.tw/application/UTK02/UTK0204_.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*",
+                "https://kham.com.tw/application/utk02/UTK0204_.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*",
                 "https://kham.com.tw/application/UTK02/UTK0201_000.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*"
             ],
             "run_at": "document_end",

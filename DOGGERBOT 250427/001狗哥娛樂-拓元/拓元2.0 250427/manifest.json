@@ -101,7 +101,31 @@
                 "js/common.js",
                 "js/tixcraft_ticket.js"
             ]
-        }        
+        },
+        {
+            "matches": [
+                "https://tixcraft.com/activity",
+                "https://indievox.com/activity"
+            ],
+            "run_at": "document_start",
+            "js": [
+                "jquery.min.js",
+                "js/common.js",
+                "js/url.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://tixcraft.com/activity",
+                "https://indievox.com/activity"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "jquery.min.js",
+                "js/common.js",
+                "js/url.js"
+            ]
+        }           
     ],
     "version": "2.0"
 }

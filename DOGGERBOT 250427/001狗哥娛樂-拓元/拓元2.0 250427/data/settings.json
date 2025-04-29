@@ -1,5 +1,6 @@
 {
     "ticket_number": 2, 
+    "target_url":"",
     "date_auto_select": {"enable": true, "date_keyword": "", "mode": "from top to bottom"}, 
     "area_auto_select": {"enable": true, "area_keyword": "", "mode": "from top to bottom"}, 
     "keyword_exclude": "\"\u8f2a\u6905\",\"\u8eab\u969c\",\"\u8eab\u5fc3\u969c\u7919\",\"\u906e\u853d\",\"\u8996\u7dda\u4e0d\u5b8c\u6574\"", 
