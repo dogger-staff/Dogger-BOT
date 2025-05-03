@@ -12,5 +12,5 @@
     "auto_reload_page_interval": 0.1, 
     "auto_reload_overheat_count": 5, 
     "auto_reload_overheat_cd": 1 ,
-    "submit_order_min_seconds": 4.6
+    "submit_order_min_seconds": 4.1
     }}

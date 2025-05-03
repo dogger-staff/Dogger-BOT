@@ -35,6 +35,8 @@ function tixcraft_area_keyword(settings) // 控制關鍵字選區域
     }
 
     let target_area = null;
+    let reload = false;
+
     if (area_keyword_array.length) {
         for (let i = 0; i < area_keyword_array.length; i++) {
             let query_string = "ul.area-list > li > a:contains('" + area_keyword_array[i] + "')";
@@ -52,9 +54,11 @@ function tixcraft_area_keyword(settings) // 控制關鍵字選區域
                 break;
             }
         }
-    }
-
-    if (!target_area || !target_area.length) {
+        // 如果有關鍵字但無匹配，且不包含空字符串，設置 reload
+        if (!target_area && !area_keyword_array.includes("")) {
+            reload = true;
+        }
+    } else {
         let query_string = "ul.area-list > li > a";
         let matched_block = [];
         $(query_string).each(function () {
@@ -86,19 +90,23 @@ function tixcraft_area_keyword(settings) // 控制關鍵字選區域
                 if (new_url) {
                     setTimeout(() => {
                         window.location.href = new_url;
-                    }, 0); //////////////////////////////////// 區域延遲
+                    }, 0);
                 }
             }
         }
-    } else {
-        console.log("No target area found.");
+    } else if (reload) {
+        console.log("No target area matched for keywords, triggering reload.");
     }
+
+    return { target_area, reload };
 }
 
 function tixcraft_area_main(settings) { // 主程式
     if (settings) {
-        tixcraft_area_keyword(settings);
+        const { target_area, reload } = tixcraft_area_keyword(settings);
+        return { target_area, reload };
     }
+    return { target_area: null, reload: false };
 }
 
 async function do_reload_if_not_overheat(settings) // 控制刷新過熱
@@ -143,7 +151,10 @@ function area_auto_reload() //控制網頁刷新
     let reload = false;
     if ($("ul.area-list > li:has(a)").length) {
         if (settings) {
-            tixcraft_area_main(settings);
+            const { target_area, reload: keyword_reload } = tixcraft_area_main(settings);
+            if (!target_area && keyword_reload) {
+                reload = true;
+            }
         }
     } else {
         reload = true;
@@ -159,8 +170,8 @@ function area_auto_reload() //控制網頁刷新
 storage.get('settings', function (items) {
     if (items.settings) {
         settings = items.settings;
-        tixcraft_clean_exclude(settings);
     }
+    tixcraft_clean_exclude(settings);
 });
 
 storage.get('status', function (items) {
