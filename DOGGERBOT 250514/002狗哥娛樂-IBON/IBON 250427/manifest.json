@@ -51,56 +51,6 @@
         "default_title": "ibon BOT"
     },
   "content_scripts": [
-
-    {
-      "matches": [
-        "https://ticket.ibon.com.tw/ActivityInfo/Details/*"
-      ],
-      "run_at": "document_start",
-      "js": [
-        "jquery.min.js",
-        "js/ibon_detail.js",
-        "js/common.js"
-      ]
-    },
-
-    {
-      "matches": [
-        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*",
-        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*",
-        "https://orders.ibon.com.tw/application/UTK02/UTK0202_.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*"
-      ],
-      "run_at": "document_end",
-      "js": [
-        "jquery.min.js",
-        "js/ibon_ticketnext.js"
-
-       ]
-    },
-
-    {
-      "matches": [
-          "https://orders.ibon.com.tw/application/UTK02/UTK0201_0.aspx?rn=*&PERFORMANCE_ID=*&PRODUCT_ID=*&SHOW_PLACE_MAP=*"
-      ],
-      "run_at": "document_end",
-      "js": [
-          "jquery.min.js",
-          "js/ibon_verification.js",
-          "js/ibon_verification_next.js"
-      ]
-    },
-
-    {
-      "matches": [
-        "https://orders.ibon.com.tw/application/UTK02/UTK0201_000.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*"
-      ],
-      "run_at": "document_end",
-      "js": [
-        "js/ibon_area.js",
-        "js/common.js"
-      ]
-    },
-
     {
       "matches": [
         "*://*.ibon.com.tw/*",
@@ -113,6 +63,51 @@
         "shadowInject.js"
       ],
       "all_frames": true
+    },
+    {
+      "matches": [
+        "https://ticket.ibon.com.tw/ActivityInfo/Details/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "jquery.min.js",
+        "js/ibon_detail.js",
+        "js/common.js"
+      ]
+    },
+    {
+      "matches": [
+          "https://orders.ibon.com.tw/application/UTK02/UTK0201_0.aspx?rn=*&PERFORMANCE_ID=*&PRODUCT_ID=*&SHOW_PLACE_MAP=*",
+          "https://orders.ibon.com.tw/application/UTK02/UTK0201_0.aspx?rn=*&PERFORMANCE_ID=*&PRODUCT_ID=*&SHOW_PLACE_MAP=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+          "jquery.min.js",
+          "js/ibon_verification.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://orders.ibon.com.tw/application/UTK02/UTK0201_000.aspx?PERFORMANCE_ID=*&PRODUCT_ID=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/ibon_area.js",
+        "js/common.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=*&PERFORMANCE_PRICE_AREA_ID=*",
+        "https://orders.ibon.com.tw/application/UTK02/UTK0201_001.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*",
+        "https://orders.ibon.com.tw/application/UTK02/UTK0202_.aspx?PERFORMANCE_ID=*&GROUP_ID=&PERFORMANCE_PRICE_AREA_ID=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery.min.js",
+        "js/ibon_ticketnext.js"
+
+       ]
     }
     
   ],

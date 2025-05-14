@@ -1,4 +1,3 @@
-const currentUrl = window.location.href;
 var settings = null;
 
 // Load settings from chrome.storage.local

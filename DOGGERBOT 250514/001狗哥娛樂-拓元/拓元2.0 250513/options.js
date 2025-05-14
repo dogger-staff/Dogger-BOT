@@ -132,3 +132,25 @@ function message(msg) {
         message.innerText = '';
     }, 3000);
 }
+
+function updateLocalTime() {
+    const timeDisplay = document.querySelector('#local_time');
+    if (timeDisplay) {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const formatted = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+        timeDisplay.innerText = formatted;
+    }
+}
+
+// 每秒更新一次時間
+setInterval(updateLocalTime, 1000);
+// 初始化顯示
+updateLocalTime();

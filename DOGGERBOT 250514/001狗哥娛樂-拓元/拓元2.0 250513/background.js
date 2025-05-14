@@ -4,7 +4,7 @@ import heartbeatconnect from './modules/heartbeatconnect.js';
 
 // 初始化擴充功能
 chrome.runtime.onInstalled.addListener(function() {
-    let default_status = 'ON';
+    let default_status = 'OFF';
     chrome.action.setBadgeText({ text: default_status });
     chrome.storage.local.set({ status: default_status });
 

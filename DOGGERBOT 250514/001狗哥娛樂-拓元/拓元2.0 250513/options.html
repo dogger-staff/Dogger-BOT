@@ -10,6 +10,7 @@
 <body>
   <div id="message"></div>
   <h2>DOGGER STUDIO-拓元搶票機器人</h2>
+  <p>適用拓元售票/本色音樂/indievox<p>
   <div class="row g-3">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -94,7 +95,7 @@
         <div class="row mb-3">
           <label for="date_keyword" class="col-sm-2 col-form-label">日期關鍵字</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="date_keyword" rows="2"></textarea>
+            <textarea class="form-control" id="date_keyword" rows="1"></textarea>
           </div>
         </div>
         <div class="row mb-3">
@@ -113,19 +114,22 @@
               <option value="random">
                 random
               </option>
+              <option value="most">
+                most
+              </option>              
             </select>
           </div>
         </div>
         <div class="row mb-3">
           <label for="area_keyword" class="col-sm-2 col-form-label">區域關鍵字</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="area_keyword" rows="2"></textarea>
+            <textarea class="form-control" id="area_keyword" rows="1"></textarea>
           </div>
         </div>
         <div class="row mb-3">
           <label for="keyword_exclude" class="col-sm-2 col-form-label">區域排除關鍵字</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="keyword_exclude" rows="2"></textarea>
+            <textarea class="form-control" id="keyword_exclude" rows="1"></textarea>
           </div>
         </div>
       </div>
@@ -141,15 +145,10 @@
           <label for="auto_reload_overheat_count" class="col-sm-2 col-form-label">每2.5秒最多可以刷新次數</label>
           <div class="col-sm-10">
             <input class="form-control" id="auto_reload_overheat_count" value="" />
-
-            <div class="bd-callout bd-callout-info">
-              <strong>提示：</strong>
-                拓元的「日期頁面」與「票價頁面」有支援這個功能。
-            </div>
           </div>
         </div>
         <div class="row mb-3">
-          <label for="auto_reload_overheat_cd" class="col-sm-2 col-form-label">達成最多刷新次數冷確時間(秒)</label>
+          <label for="auto_reload_overheat_cd" class="col-sm-2 col-form-label">達最多刷新次數冷確時間(秒)</label>
           <div class="col-sm-10">
             <input class="form-control" id="auto_reload_overheat_cd" value="" />
           </div>
@@ -208,6 +207,12 @@
           <label for="user_guess_string" class="col-sm-2 col-form-label">驗證問題</label>
           <div class="col-sm-10">
             <textarea class="form-control" id="user_guess_string" rows="1"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">本機時間</label>
+          <div class="col-sm-10">
+            <p class="form-control" type="text" id="local_time" readonly />
           </div>
         </div>
       </div>
